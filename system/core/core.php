@@ -27,7 +27,7 @@ define("FOLDER_CORELIBRARIES", FOLDER_APP.S."libraries".S."core");
 define("FOLDER_MODELS", FOLDER_APP.S."models");
 define("FOLDER_VIEWS", FOLDER_APP.S."views");
 //Debug Configuration
-error_reporting(E_ALL);
+error_reporting(E_ERROR);
 
 //Requiring other configuration
 require_once FOLDER_CONFIGURATIONS.S."database.php";
@@ -62,6 +62,6 @@ function __autoload($name){
         require_once FOLDER_MODELS.S.$name.".php";
     }else{
         //Used since there may some class that is placed in sub directories
-        searchController($name,FOLDER_CONTROLLERS);
+        searchController($name, FOLDER_CONTROLLERS);
     }    
 }

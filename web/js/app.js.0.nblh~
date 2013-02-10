@@ -1,0 +1,174 @@
+/**
+ * APP.JS
+ * APP.JS is a javascript framework intended for speed, easy-to-use, and
+ * extendable framework.
+ *
+ * Copyrights 2013 (C) - ION Developer Group
+ */
+
+(function (window) {
+    "use strict";
+    /**
+     * This is the constructor of the AppJS object
+     */
+    var AppJS = function (selector) {
+        /**
+         * This to make sure that there is always new instance of AppJS used
+         */
+        if (!(this instanceof AppJS)) {
+            return new AppJS(selector);
+        }
+        this.construct(selector);
+    };
+    AppJS.prototype = {
+        /**
+         * Constructor of the AppJS object, it does some initialization and
+         * set-up core values
+         */
+        construct: function (selector) {
+            return this.select(selector);
+        },
+        /**
+         * Do an ajax request
+         * rules = {
+         *  url, method, username, password, data, mime,
+         * }
+         */
+        ajax: function (rules, callback) {
+            var xmlhttp = new window.XMLHttpRequest();
+            
+            xmlhttp.open(rules.method, rules.url, true, rules.username, rules.password);
+            xmlhttp.setRequestHeader("Content-type", mime);
+            
+            xmlhttp.onreadystatechange = function () {
+                callback.call(xmlhttp);
+            }
+            
+            xmlhttp.send(data);
+        },
+        /**
+         * Select one of the currently selected node by its index
+         */
+        at: function (index) {
+            this.node = this.node[index];
+            return this;
+        },
+        /**
+         * Bind an event handler to current node
+         */
+        bind: function (eventName, callback) {
+            this.each(this.node, function (node) {
+                node.addEventListener(eventName, function (event) {
+                    callback.call(node, event);
+                }, false);
+            });
+            return this;
+        },
+        /**
+         * Select child node from current node, to search based on its name
+         * use select instead
+         */
+        child: function (index) {
+            this.first();
+            this.node = this.node.children[index];
+            return this;
+        },
+        /**
+         * Apply a css rule on current node
+         */
+        css: function (rules) {
+            this.each(this.node, function (node) {
+                for (var r in rules) {
+                    node.style[r] = rules[r];
+                }
+            });
+            return this;
+        },
+        /**
+         * Walk on an array and call the operation passed witht he current array
+         * element walked on
+         */
+        each: function (array, operation) {
+            var i = 0;
+            if (array.length) {
+                for (i = 0; i < array.length; i += 1) {
+                    operation.call(this, array[i]);
+                }
+            } else {
+                operation.call(this, array);
+            }
+            return this;
+        },
+        /**
+         * Select the first node from current nodes
+         */
+        first: function () {
+            if (this.node.length) {
+                this.node = this.node[0];
+            }
+            return this;
+        },
+        /**
+         * Set the inner HTML of current node
+         */
+        html: function (html) {
+            this.each(this.node, function (node) {
+                node.innerHTML = html;
+            });
+            return this;
+        },
+        /**
+         * Remove current node
+         */
+        remove: function () {
+            /**
+             * Handle array differently
+             * We have to iterate using while since node length is sequentially
+             * decremented each node is removed. Thats why we use this.node[0],
+             * since those node array will finally reach zero.
+             */
+            if (this.node.length) {
+                while (this.node.length !== 0) {
+                    if (this.node[0].parentElement) {
+                        this.node[0].parentElement.removeChild(this.node[0]);
+                    } else {
+                        throw new Error("Unable to remove root element");
+                    }
+                }
+            } else {
+                if (this.node.parentElement) {
+                    this.node.parentElement.removeChild(this.node);
+                } else {
+                    throw new Error("Unable to remove root element");
+                }
+            }
+            return this;
+        },
+        /**
+         * Select a node
+         */
+        select: function (selector) {
+            var prefix = selector[0], select = selector.substr(1), context = this.node || window.document;
+            switch (prefix) {
+            case "#":
+                this.node = context.getElementById(select);
+                break;
+            case "@":
+                this.node = context.getElementsByName(select);
+                break;
+            case "*":
+                this.node = context.getElementsByTagName("*");
+                break;
+            case ".":
+                this.node = context.getElementsByClassName(select);
+                break;
+            default:
+                this.node = context.getElementsByTagName(selector);
+                break;
+            }
+            return this;
+        }
+    };
+    window.appjs = window.a = AppJS;
+
+}(this));

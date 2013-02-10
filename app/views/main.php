@@ -4,11 +4,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>APP (Aeon PHP Project) 2.0 - SilverGate</title>
         <link rel="stylesheet" href="/web/css/main.css"/>
+        <script src="/web/js/app.js"></script>        
     </head>
     <body>
         <div id="area">
-            <h1>Aeon PHP Project 2.0</h1>
-            <h2>Silvergate</h2>
+            <h1 id="app">Aeon PHP Project 2.0</h1>            
             <p>
                 Aeon PHP Project 2.0 - Silvergate<br/>
                 Is a PHP based framework that makes web development using PHP
@@ -33,7 +33,12 @@
                 unauthorized access. The routing, request, and response process
                 is also redesigned to make the communication process better.              
             </p>
-            <a href="http://idgaditya78.github.com/app-2-silvergate">GitHub</a>
-        </div>        
+            <p>
+                <a href="http://idgaditya78.github.com/app-2-silvergate">GitHub</a>
+            </p>
+        </div>
+        <div id="footer">
+            Copyrights 2013 &copy; ION Developer Group
+        </div>
     </body>
 </html>
