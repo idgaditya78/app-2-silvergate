@@ -1,0 +1,42 @@
+/* 
+    Document   : main
+    Created on : Feb 9, 2013, 1:32:29 PM
+    Author     : Aditya Aida Purwa
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root, body { 
+    display: block;
+    margin:0px;
+    
+    background: #111;    
+    color:white;
+    font-family: sans-serif;
+}
+
+#area{
+    width:978px;
+    margin:auto;
+}
+
+h1{
+    font-size:47px;    
+    margin:0px;
+    padding:0px;
+}
+h2{
+   margin:0px;
+   font-size:20px;
+}
+p{
+    width:780px;
+    text-align: justify;
+    font-size:16px;
+}
+
