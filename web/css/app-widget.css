@@ -1,0 +1,81 @@
+/*
+    Document   : app
+    Created on : Feb 10, 2013, 4:05:30 PM
+    Author     : Aditya Aida Purwa
+    Description:
+        This stylesheet manage the basic displays of appjs widget
+*/
+
+widget{
+    display:block;
+}
+
+widget .app-tab-widget{
+    display: block;
+
+    border:solid thin rgb(10,90,190);
+}
+
+widget .app-tab-panel{
+    display: block;
+    position: relative;
+    z-index: 1;
+    
+    border-bottom:solid thin gray;
+}
+
+widget .app-tab{
+    display: inline-block;
+    padding:4px 6px 10px 6px;    
+    position: relative;
+    z-index: 0;        
+
+    background: #DDD;
+    border-radius:4px 4px 0px 0px;
+    border:solid thin silver;
+    color:#888;
+    cursor: pointer;
+    box-shadow:inset 1px 1px 0px rgba(255,255,255,0.5);
+
+    transition:all 0.5s ease;
+    transform: translateY(0%);
+}
+widget .app-tab-active{
+    display: inline-block;
+    padding:4px 6px 10px 6px;    
+
+    background: #EEE;
+    border:solid thin gray;   
+    border-bottom:solid thin #EEE;
+    border-radius:4px 4px 0px 0px;       
+
+    transition:all 0.5s ease;
+    transform: translateY(30%);
+}
+
+widget .app-tab-pages{
+    display: block;
+
+}
+
+widget .app-tab-page{
+    display: none;
+    visibility: hidden;
+    position: relative;   
+        
+    transition:all 0.5s ease;
+}
+widget .app-tab-page-active{
+    display: block;
+    visibility: visible;    
+    z-index: 2;    
+    position: relative;
+    margin-top:-15px;
+    
+    background:#EEE;
+    box-shadow:0px 1px 0px #CCC, 0px 2px 0px #AAA;
+    border-left:solid thin gray;
+    border-bottom:solid thin gray;
+    border-right:solid thin gray;
+    border-radius:0px 0px 6px 6px;    
+}

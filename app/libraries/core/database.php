@@ -7,14 +7,25 @@
  */
 class Database extends PDO {
 
+    
+    protected $_databaseName = "No Database Selected";
+    /**
+     * Get the name of the database
+     * @return string
+     */
+    public function getDatabaseName(){
+        return $this->_databaseName;
+    }
     /**
      * Create a new instance of the Database class
      * Will only construct its parent when the USEDATABSE is turned on
      */
-    function __construct() {
+    function __construct($databaseName="") {
         if(USEDATABASE){
-            parent::__construct(DBDRIVER.":host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS);
+            if(!$databaseName){
+                $databaseName = DBNAME;
+            }
+            parent::__construct(DBDRIVER.":host=".DBHOST.";dbname=".$databaseName, DBUSER, DBPASS);
         }
     }
-
 }

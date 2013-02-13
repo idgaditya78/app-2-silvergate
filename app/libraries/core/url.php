@@ -13,7 +13,7 @@ class URL {
      */
     private $_url = "";
     /**
-     * Matches Ffrom the parsing of the url
+     * Matches from the parsing of the url
      * @var array
      */
     private $_urlmatch = array();
@@ -32,7 +32,7 @@ class URL {
      * @return string
      */
     function getProtocol(){
-        return $this->_urlmatch[1];
+        return $this->_urlmatch["scheme"];
     }
     
     /**
@@ -40,7 +40,7 @@ class URL {
      * @return string
      */
     function getPath(){
-        return $this->_urlmatch[2];
+        return $this->_urlmatch["path"];
     }
     
     /**
@@ -48,7 +48,14 @@ class URL {
      * @return string
      */
     function getQueryString(){
-        return $this->_urlmatch[3];
+        return $this->_urlmatch["query"];
+    }
+    
+    /**
+     * Get the host name in the URL
+     */
+    function getHost(){
+        return $this->_urlmatch["host"];
     }
     
     /**
@@ -56,7 +63,7 @@ class URL {
      * @param type $url 
      */
     private function parse($url){                
-        preg_match("/(.+):\/{2,3}(.+)\??(.+)?/i", $url, $this->_urlmatch);        
+        $this->_urlmatch = parse_url($url);
     }
 
 }

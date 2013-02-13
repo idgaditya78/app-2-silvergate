@@ -29,6 +29,8 @@ define("FOLDER_VIEWS", FOLDER_APP.S."views");
 //Debug Configuration
 error_reporting(E_ERROR);
 
+//Requiring other core files
+require_once "common.php";
 //Requiring other configuration
 require_once FOLDER_CONFIGURATIONS.S."database.php";
 
@@ -37,10 +39,10 @@ function searchController($name,$rootdir){
     $dir = dir($rootdir);
     //Read recursively, pass . and .., if the name of the file is equal, require it
     while($fname = $dir->read()){
-        if($fname == ".") continue;
-        if($fname == "..") continue;
+        if($fname === ".") continue;
+        if($fname === "..") continue;
         if(is_file($rootdir.S.$fname)){
-            if($name.".php" == $fname){                
+            if($name.".php" === $fname){                
                 require_once $rootdir.S.$fname;
             }
         }else if(is_dir($rootdir.S.$fname)){

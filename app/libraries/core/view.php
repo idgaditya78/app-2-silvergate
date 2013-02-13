@@ -36,8 +36,12 @@ class View {
      * @param string $page the page to render, located in app/views/ folder
      */
     function render($page){
-        extract($this->vars);
-        require_once FOLDER_VIEWS.S.$page.".php";
+        if(file_exists(FOLDER_VIEWS.S.$page.".php")){
+            extract($this->vars);
+            require_once FOLDER_VIEWS.S.$page.".php";
+        }else{
+            header("location: ".REDIRECT_ERROR003);
+        }
     }
 
 }

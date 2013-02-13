@@ -12,52 +12,52 @@ class Controller {
      * The view used to render page
      * @var View
      */
-    var $view;    
+    var $view;
     /**
      * The request passed to this controller
      * @var Request
      */
-    var $request;    
+    var $request;
     /**
      * A function that will be called each method is called
      * Return true to allow access, return false to block access
      * @var function
      */
-    var $authenticator;
-    
+    protected $authenticator;
+
     /**
      * Create new instance of the Controller class
      */
-    function __construct($request) {
+    function __construct(Request $request) {
         Session::start();
         $this->view = new View();
-        $this->request = $request;      
-        
-    }                
-    
+        $this->request = $request;
+
+    }
+
     /**
      * Used to hook any request for method call to authenticator
      * @param string $name the caller name
      * @param array $arguments the arguments passed to caller
      */
-    public final function __call($name, $arguments) {        
+    public final function __call($name, $arguments) {
         //If authenticator exists, call it to specify the access priviliges
         if($this->authenticator){
             if($this->authenticator->call(array($name,$arguments))){
                 $this->{$name}($arguments);
             }else{
-                header("location: /others/error/forbidden");
+                header("location: ".REDIRECT_ERROR005);
             }
         }else{
             $this->{$name}($arguments);
         }
     }
-    
+
     /**
      * Method called when there is no method specified
      */
     protected function main($args=null){
-        
+
     }
 
 }

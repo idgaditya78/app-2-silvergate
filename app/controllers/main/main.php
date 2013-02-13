@@ -20,5 +20,9 @@ class Main extends Controller{
         parent::main();
         $this->view->render("main");
     }
+    
+    protected function app($args=null){
+        $this->view->render("appdemo");
+    }
 
 }

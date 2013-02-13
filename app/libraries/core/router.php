@@ -18,13 +18,13 @@ class Router {
      * Route the request to specific controller
      * @param Request $request The request to route
      */
-    function route($request){
-        $paths = explode('/', $request->getUrl()->getPath());
-        
+    function route(Request $request){
+        //Separate path by / and remove ending /
+        $paths = explode('/', rtrim($request->getUrl()->getPath(), '/'));        
         //Determines the default
         $controllerFolder = $paths[0] ? $paths[0] : "main";
         //Non main folder uses FolderMain as the default controller
-        if($controllerFolder == "main"){
+        if($controllerFolder === "main"){
             $controllerName = $paths[1] ? $paths[1] : "main";       
         }else{
             $controllerName = $paths[1] ? $paths[1] : $controllerFolder."main";
@@ -37,10 +37,10 @@ class Router {
             if(method_exists($controller,$methodName)){
                 $controller->{$methodName}($args);
             }else{
-                header("location: /others/error/pagenotfound");
+                header("location: ".REDIRECT_ERROR002);
             }
         }else{
-            header("location: /others/error/pagenotfound");
+            header("location: ".REDIRECT_ERROR001);
         }
         
     }

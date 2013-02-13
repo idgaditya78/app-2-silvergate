@@ -15,7 +15,7 @@ class Request {
     
     /**
      * Create new instance of the Request class
-     * @param URL $url The URL of the request
+     * @param string $url The URL of the request
      */
     function __construct($url) {
         $this->_url = new URL($url);
